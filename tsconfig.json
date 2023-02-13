@@ -1,0 +1,31 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "module": "commonjs", 
+    "target": "es2017",                                  
+    "lib": ["es6", "dom", "es7"],                                       
+    "jsx": "react", 
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "preserveConstEnums": true,                               
+    "experimentalDecorators": true,                  
+    "emitDecoratorMetadata": true,                                  
+    "rootDir": ".",                                  
+    "baseUrl": "./src",                                    
+    "paths": {
+      "@/*": ["./*"],
+    },                                 
+    "outDir": "dist",                                   
+    "esModuleInterop": true,                             
+    "forceConsistentCasingInFileNames": true, 
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "importHelpers": true,     
+    "declaration": true,      
+    "strict": true,                                      
+    "skipLibCheck": true                                 
+  },
+  "include": ["./src/**/*.*"],
+  "exclude": ["node_modules", "build", "test"]
+}
