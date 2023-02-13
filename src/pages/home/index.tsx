@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, {Fragment} from 'react';
+import Header from '@/components/header';
 
 interface IProps {
     name?: string
@@ -27,12 +27,16 @@ export default class Home extends React.Component<IProps, IState> {
   }
   render() {
     return (
-      <div>
-        <p>hello {this.state.name}</p>
-        <input type="text" placeholder="input new name"
-          onChange={(e) => this.setState({ name: e.target.value })}>
-        </input>
-      </div>
+      <Fragment>
+          <Header title='首页'></Header>
+          <div>
+          <p>hello {this.state.name}</p>
+          <input type="text" placeholder="input new name"
+            onChange={(e) => this.setState({ name: e.target.value })}>
+          </input>
+        </div>
+      </Fragment>
+      
     );
   }
 }
