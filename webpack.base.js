@@ -39,8 +39,8 @@ module.exports = {
     resolve: {
       extensions: [".js", ".jsx", ".ts", ".tsx", ".scss", ".less", ".json", ".css"],
       alias: {
-        'react': '/Users/caoping/www/resources/react/build/node_modules/react/cjs/react.development.js',
-        'react-dom': '/Users/caoping/www/resources/react/build/node_modules/react-dom/cjs/react-dom.development.js',
+        // 'react': '/Users/caoping/www/resources/react/build/node_modules/react/cjs/react.development.js',
+        // 'react-dom': '/Users/caoping/www/resources/react/build/node_modules/react-dom/cjs/react-dom.development.js',
         '@': path.resolve(__dirname, 'src')
       },
       modules: ["node_modules"]

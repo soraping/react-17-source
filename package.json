@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "npx webpack --progress --color",
+    "build": "npx webpack --config ./webpack.prod.js --progress --color",
     "start": "npx webpack-dev-server --progress --color"
   },
   "devDependencies": {
