@@ -17,7 +17,7 @@ const devServer = {
     // headers: { // 向所有的请求添加headers
     //   "X-Custom-Foo": "bar"
     // },
-    // historyApiFallback: true, // 当使用html5 history api,将会在响应404时返回index.html。
+    historyApiFallback: true, // 当使用html5 history api,将会在响应404时返回index.html。
     // historyApiFallback: { 
     //    rewrites: [ // 通过传递一个object来对该共呢个做更多的定
     //      { from: /^\/$/, to: '/views/landing.html' },

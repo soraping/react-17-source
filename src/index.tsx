@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import Home from '@/pages/home';
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import Router from './router'
 
 interface IProps {
   name?: string;
@@ -13,9 +14,11 @@ interface IState {
 class App extends React.Component<IProps, IState> {
     render(){
         return (
-            <div>
-              <Home name='开头'></Home>
-            </div>
+          <React.StrictMode>
+            <BrowserRouter>
+              <Router />
+            </BrowserRouter>
+        </React.StrictMode>
         )
     }
 }

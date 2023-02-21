@@ -1,5 +1,6 @@
 import React, {Fragment} from 'react';
 import Header from '@/components/header';
+import { Link , Outlet} from 'react-router-dom'
 
 interface IProps {
     name?: string
@@ -34,6 +35,15 @@ export default class Home extends React.Component<IProps, IState> {
           <input type="text" placeholder="input new name"
             onChange={(e) => this.setState({ name: e.target.value })}>
           </input>
+        </div>
+        <div>
+          <p>
+          <Link to='/user'>to user</Link>
+            </p>
+            <p>
+            <Link to='/about'>to about</Link>
+          </p>
+          <Outlet />
         </div>
       </Fragment>
       
