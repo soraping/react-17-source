@@ -1,10 +1,11 @@
-const path = require("path");
 const webpack = require('webpack')
 const WebpackBaseConfig = require("./webpack.base");
+const configJson = require('./config')
+
 
 const prodConfig = {
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: configJson.distPath,
         filename: 'bundle-[name]-[hash].js',
         chunkFilename: 'chunk.[id].[chunkhash].js',
         publicPath: './'
@@ -26,30 +27,50 @@ const prodConfig = {
             automaticNameDelimiter: '-',
             // cacheGroups里的文件名有效
             name: true,
-            //缓存组，这里是我们表演的舞台，抽取公共模块什么的，都在这个地方
+            //缓存组，抽取公共模块什么的，都在这个地方
             cacheGroups: {
-                vendors: {
-                    test: /[\\/]node_modules[\\/]/,
+                async: {
+                    chunks: 'async',
+                    minSize: 3000,
+                    minChunks: 2,
+                    maxAsyncRequests: 5,
+                    maxInitialRequests: 3,
+                    priority: -1,
+                    reuseExistingChunk: true,
+                },
+                commons: {
+                    chunks: 'all',
+                    test: /[\\/]node_modules[\\/](@babel|core-js|css-loader|style-loader|ansi-html|html-entities|querystring)/,
                     // 如果一个模块同时符合default和vendors，vendors的优先级更高，就优先将模块打包到vendors里
-                    priority: 2,
+                    priority: 1,
+                    minChunks: 1,
+                    enforce: true,
                     // 不重复打包，碰到已打包过的模块就直接使用
                     reuseExistingChunk: true,
-                    filename: 'vendors.js'
+                    filename: 'commons.js'
                 },
-                default: {
-                    minChunks: 2,
-                    priority: -20,
+                vendors: {
+                    filename: 'vendors.js',
+                    chunks: 'initial', // 必须三选一： "initial" | "all" | "async"(默认就是异步)
                     reuseExistingChunk: true,
-                    filename: 'defalut.js'
-                },
+                    priority: 0,
+                    minChunks: 1,
+                    enforce: true,
+                    test: /[\\/]node_modules[\\/]/,
+                }
             }
         }
     },
-    mode: "production", // 开发模式
-    devtool: "source-map", // 开启调试
-    // plugins: WebpackBaseConfig.plugins.concat(
-    //     new webpack.optimize.UglifyJsPlugin()
-    // )
+    mode: "production",
+    // 没有sourcesContent，调试只能看到模块信息和行信息，不能看到源码
+    // devtool: "nosources-source-map",
+    devtool: "none",
+    plugins: WebpackBaseConfig.plugins.concat(
+        new webpack.DllReferencePlugin({
+            context: configJson.BASE_DIR,
+            manifest: configJson.manifestPath,
+        }),
+    )
 }
 
 let webpackConfig = Object.assign({}, WebpackBaseConfig, {...prodConfig});

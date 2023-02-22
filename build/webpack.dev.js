@@ -1,9 +1,9 @@
-const path = require("path");
 const WebpackBaseConfig = require("./webpack.base");
+const configJson = require('./config')
 
 // devServer 配置
 const devServer = {
-    static: path.resolve('./dist'), // 对外提供的访问内容的路径，只有在提供静态文件访问的情况下才需要使用该配置。
+    static: configJson.staticPath, // 对外提供的访问内容的路径，只有在提供静态文件访问的情况下才需要使用该配置。
     compress: true, // 配置是否启用 gzip 压缩。boolean 为类型，默认为 false。
     host: 'localhost',
     port: 8000,
